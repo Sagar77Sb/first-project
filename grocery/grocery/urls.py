@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",home),
     path("kitchen-",include(("groapp.urls","groapp"),namespace="apps")),
+    path("cartapp-",include(('cartapp.urls','cartapp'),namespace="addcart"))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
