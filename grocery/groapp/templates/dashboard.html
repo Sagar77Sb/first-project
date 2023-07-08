@@ -5,50 +5,51 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <!-- <link rel="stylesheet" href="{% static 'css/my.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/my.css' %}"> 
     <link rel="stylesheet" href="{% static 'js/main.js' %}">
     <title>Apna Kitchen</title>
   </head>
 <body>
-    <nav class="navbar navbar-expand-lg ">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar scroll</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;"> 
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">HOME</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{% url 'apps:dashboards' %}">DASHBOARD</a>
-            </li>
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Apna Kitchen</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;"> 
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">HOME</a>
+          </li>
+      {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'apps:dashboards' %}">DASHBOARD</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'apps:logouts' %}">LOGOUT</a>
+          </li>
+          <li><h4>Welcome {{user}} </h4 ></li>
+           
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'addcart:product' %}">PRODUCTS</a>
+          </li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                PRODUCTS
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Grocery</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Dairy</a></li>
-              </ul>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'addcart:showcart1' %}">SHOWCART</a>
+          </li>
+     {%else%}
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'apps:register' %}">REGISTER</a>
+          </li>
 
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'apps:logouts' %}">LOGOUT</a>
-              </li>
-              
-            <li><h4>Welcome {{user}} </h4 ></li>
-          </ul>
-          <!-- <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form> -->
-        </div>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'apps:logins' %}">LOGIN</a>
+          </li>
+      {%endif%}
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
     
     <form method="post">
         {%csrf_token%}

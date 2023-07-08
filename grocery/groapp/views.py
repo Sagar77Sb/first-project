@@ -34,6 +34,7 @@ def userlogin(request):
             return render(request,'login.html',d)
 
 def user_dashboard(request):
+  try:
     if request.method=='POST':
         user_id=request.session.get("id")
         obj_user=User.objects.get(id=user_id)
@@ -45,6 +46,9 @@ def user_dashboard(request):
     else:
         d={'forms':RegistrationForm}
         return render(request,'dashboard.html',d)
+  except User.DoesNotExist:
+      return False
+      
 
 
 def logoutt(request):
